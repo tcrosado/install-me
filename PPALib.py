@@ -1,22 +1,26 @@
 #	Author : Tiago Rosado (speedofthesea)
 #
-#	Version : 0.0.1 ALPHA
+#	Version : 0.0.2 ALPHA
 #
+import re
 
 class PPA(object):
+
 	_name = ''
 	_url  = ''
 	_description = '' 
 	_sources = 0
 	_binaries = 0
 
-	def __init__(self,name,url,description,sources,binaries):
-		self._name = name
-		self._url = url
-		self._description = description
-		self._sources = sources 
-		self._binaries = binaries
+	def __init__(self,element):
+		parser = Parser(element)
 
+		self._name = parser.parseName()
+		self._url = parser.parseURL()
+
+		self._description, self._sources, self._binaries = parser.parseInfo()
+		
+		
 	def getName(self):
 		return self._name
 
@@ -33,3 +37,19 @@ class PPA(object):
 		return self._binaries
 
 
+class Parser(object):
+		
+		def __init__(self,element):
+			self._element = element
+
+		def parseURL(self):
+			url = re.compile('<a href="(.*?)">', re.DOTALL).findall(self._element)
+			return url[0]
+
+		def parseName(self):
+			name = re.compile('">(.*?)</a>', re.DOTALL).findall(self._element)
+			return name[0]
+
+		def parseInfo(self):
+			desc = re.compile('<td>(.*?)</td>', re.DOTALL).findall(self._element)
+			return desc[1:] 

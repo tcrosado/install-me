@@ -5,6 +5,8 @@
 
 import http.client
 import re
+import sys
+
 from PPALib import PPA
 
 def httpPageRequest(searchTerm):
@@ -19,37 +21,45 @@ def httpPageRequest(searchTerm):
 
 	return str(pgReq.getresponse().read())
 
+def ppaSearch(searchTerm):
+	page = httpPageRequest(searchTerm)
+	table = re.compile('<tr class="ppa_batch_row">(.*?)</tr>', re.DOTALL).findall(page)
 
+	repList = []
 
-def parseURL(element):
+	for element in table:
+		repList.append(PPA(element))
+
+	return repList
+
+def ppaList(listOfPPA):
+	print("-------------------------------------")
+	id = 0
+	for ppa in listOfPPA:
+		id+=1
+		print(str(id)+" - " + ppa.getName())
+		print("Desc: " + ppa.getDescription())
+		print("Sources: " + str(ppa.getSources()))
+		print("Binaries: " + str(ppa.getBinaries()))
+		print("-------------------------------------")
 	
-	url = re.compile('<a href="(.*?)">', re.DOTALL).findall(element)
+	return id
 
-	return url[0]
+def Options(args):
+	if (args[1] == "install"):
+		maxId = ppaList(ppaSearch(args[2]))
+		
+		print("Chose the most likely ppa that has the software you need:")
+		userOP = input()
 
-def parseName(element):
-	name = re.compile('">(.*?)</a>', re.DOTALL).findall(element)
-	return name[0]
+		while int(userOP) not in range(maxId):
 
-def parseInfo(element):
-	desc = re.compile('<td>(.*?)</td>', re.DOTALL).findall(element)
-	return desc[1:]
+			print("Error : Invalid Option")
+			userOP = input()
+		
+		print("You entered "+ userOP)
+	else:
+		print("Error : Invalid Option")
 
-page = httpPageRequest("sublime text")
-table = re.compile('<tr class="ppa_batch_row">(.*?)</tr>', re.DOTALL).findall(page)
-
-
-ppaList = []
-for element in table:
-	url = parseURL(element)
-	name = parseName(element)
-	desc = parseInfo(element)
-
-	print(desc)
-
-
-
-
-#tes = PPA('name','http','desc',0,0)
-#print(tes.getName())
-
+	
+Options(sys.argv)
