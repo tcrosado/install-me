@@ -1,6 +1,6 @@
 #	Author : Tiago Rosado (speedofthesea)
 #
-#	Version : 0.0.1 ALPHA
+#	Version : 0.0.2 ALPHA
 #
 
 import http.client
@@ -8,6 +8,8 @@ import re
 import sys
 
 from PPALib import PPA
+from Error import *
+from Messages import * 
 
 def httpPageRequest(searchTerm):
 	''' String -> String:
@@ -22,6 +24,10 @@ def httpPageRequest(searchTerm):
 	return str(pgReq.getresponse().read())
 
 def ppaSearch(searchTerm):
+	''' String -> List of PPA's
+	ppaSearch(searchTerm) return a list of PPA Objects containg every PPA
+	found during the search '''
+
 	page = httpPageRequest(searchTerm)
 	table = re.compile('<tr class="ppa_batch_row">(.*?)</tr>', re.DOTALL).findall(page)
 
@@ -33,6 +39,11 @@ def ppaSearch(searchTerm):
 	return repList
 
 def ppaList(listOfPPA):
+	''' List of PPA's 
+	ppaList(listOfPPA) prints the localID, name, description, 
+	number of sources and binaries of every PPA in the given list returning 
+	the number of PPA's  of that list'''
+
 	print("-------------------------------------")
 	id = 0
 	for ppa in listOfPPA:
@@ -45,21 +56,49 @@ def ppaList(listOfPPA):
 	
 	return id
 
+def ppaSelect(searchTerm):
+	listOfPPA = ppaSearch(searchTerm)
+	maxId=ppaList(listOfPPA)
+	
+	try:
+		print("Selet the PPA most likely to have the program you are looking for:(0 to exit)")
+		id =int(input())
+		while id>maxId:
+			InvalidOptionError()
+			print("Input a valid PPA ID:")
+			id=int(input())
+		if (id == 0) :
+			exit()
+	except ValueError:		
+		# Ends the program if other than a number is passed as input
+		InvalidOptionError()
+		#TESTING 
+		return -1
+
+	return listOfPPA[id]
+
+def install(searchTerm):
+	ppa = ppaSelect(searchTerm)
+		
+
+
+	return 
+
+
+
 def Options(args):
-	if (args[1] == "install"):
-		maxId = ppaList(ppaSearch(args[2]))
+	try:
+		if (args[1] == "install"):
 		
-		print("Chose the most likely ppa that has the software you need:")
-		userOP = input()
-
-		while int(userOP) not in range(maxId):
-
-			print("Error : Invalid Option")
-			userOP = input()
+			install(" ".join(args[2:]))
 		
-		print("You entered "+ userOP)
-	else:
-		print("Error : Invalid Option")
+		elif (args[1] == "help"):
+			Help()
+		else:
+			InvalidOptionError()
+
+	except IndexError:
+		FewArgumentsError()
 
 	
 Options(sys.argv)

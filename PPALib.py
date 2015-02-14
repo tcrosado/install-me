@@ -4,6 +4,9 @@
 #
 import re
 
+'''
+	PPA class stores a basic information of a PPA. 
+'''
 class PPA(object):
 
 	_name = ''
@@ -36,7 +39,11 @@ class PPA(object):
 	def getBinaries(self):
 		return self._binaries
 
-
+''' 
+	Parser class handles pre-parsed elements comming from the search result.
+This class parses each information element found into diferent types compatible 
+with the PPA class. 
+'''
 class Parser(object):
 		
 		def __init__(self,element):
