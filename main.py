@@ -69,18 +69,19 @@ def ppaSelect(searchTerm):
 			id=int(input())
 		if (id == 0) :
 			exit()
+
+		
+
 	except ValueError:		
 		# Ends the program if other than a number is passed as input
 		InvalidOptionError()
-		#TESTING 
-		return -1
-
+		exit()
+		
 	return listOfPPA[id]
 
 def install(searchTerm):
 	ppa = ppaSelect(searchTerm)
-		
-
+	
 
 	return 
 
