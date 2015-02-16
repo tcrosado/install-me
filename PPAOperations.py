@@ -48,6 +48,7 @@ def listPPAS(listOfPPA):
 	for ppa in listOfPPA:
 		id+=1
 		print(str(id)+" - " + ppa.getName())
+		print("PPA Author: " + ppa.getAuthor())
 		print("Desc: " + ppa.getDescription())
 		print("Sources: " + str(ppa.getSources()))
 		print("Binaries: " + str(ppa.getBinaries()))
@@ -90,4 +91,5 @@ def getPPAInfo(ppa):
 	print("Software List avaliable in " + ppa.getName() + " :")
 	for element in table:
 		print(element[21:-16])
+	#Aviso e Opçoes
 	
