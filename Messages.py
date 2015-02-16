@@ -14,3 +14,9 @@ class Message(object):
 
 	def proceed(self):
 		print("Do you want to proceed?(Y to continue/N to exit)")
+
+	def addRepo(self,name):
+		print("You are about to add "+name+" to your local PPA repository.")
+
+	def install(self,name):
+		print("You are about to install " + name + " on your Ubuntu machine.\n")

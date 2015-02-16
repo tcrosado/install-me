@@ -15,9 +15,11 @@ from Messages import *
 def install(searchTerm):
 	ppa = selectPPA(searchTerm)
 	[name,sources] = getPPAInfo(ppa)
+	
 	Message().advice()
-	print("You are about to add "+ppa.getName()+" to your local PPA repository.\n")
-	print("And also install " + name + " on your Ubuntu machine.\n")
+
+	Message().addRepo(ppa.getName())
+	Message().install(name)
 	
 	
 	condition = True
