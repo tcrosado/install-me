@@ -1,6 +1,7 @@
 import http.client
 import re
 from PPALib import PPA
+from Error import InvalidOptionError
 
 def httpRequestPage(site,url):
 	''' String,String -> String
@@ -91,26 +92,48 @@ def selectPPA(searchTerm):
 	return listOfPPA[id-1]
 
 def getPPAInfo(ppa):
+	''' PPA -> [String,List of Strings]
+	getPPAInfo(ppa) from a given ppa object, diplays the list of software from that PPA and confirms 
+	with the user if the PPA has the software required by the user returning the name of that software
+	and a list of lines to add to sources.list file'''
+
 	url = ppa.getURL()
 	page = httpRequestPage("launchpad.net",url)
 	table = re.compile('<img src="/@@/package-source"(.*?)</td>', re.DOTALL).findall(page)
 	softwareList = []
 
-	print("Software List avaliable in " + ppa.getName() + " :")
+	# parsing info to add to sources.list
+	preParse = re.compile('<pre id="sources-list-entries" class="wrap">(.*?)</pre>', re.DOTALL).findall(page)
+	
+	finalParse = re.sub("<(.*?)>", "", preParse[0])
+	
+	ppaSources = finalParse.split("\\n")
+
+
+	
+	while '' in ppaSources:
+		# make sure it doesn't return empty strings
+		ppaSources.remove('')
+	
+	print('################################################')	
+	print("Software List avaliable in " + ppa.getName() + " :\n")
 	for element in table:
 		name = element[21:-16]
 		if name not in softwareList:
 			softwareList.append(name)
-			print(name)
+			print(name+"\n")
+
+	print('################################################')
+
 
 	condition = True
 	while condition:
 		print("Write down the software you want to install matching the list: (0 to exit)")
 		
-		userSelect = input()
+		softwareName = input()
 
-		if userSelect not in softwareList:
-			if userSelect == '0':
+		if softwareName not in softwareList:
+			if softwareName == '0':
 				exit()
 			InvalidOptionError()
 		else:
@@ -118,5 +141,7 @@ def getPPAInfo(ppa):
 
 	# Need to return software name and deb lines
 
-	#Show Warnings 
+	return [softwareName,ppaSources]
 	
+	
+
