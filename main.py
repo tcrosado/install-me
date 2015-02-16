@@ -14,8 +14,8 @@ from Messages import *
 
 def install(searchTerm):
 	ppa = selectPPA(searchTerm)
+	getPPAInfo(ppa)
 	
-
 	return 
 
 
