@@ -15,7 +15,7 @@ from Messages import *
 def install(searchTerm):
 	ppa = selectPPA(searchTerm)
 	getPPAInfo(ppa)
-	
+
 	return 
 
 
@@ -27,7 +27,7 @@ def options(args):
 			install(" ".join(args[2:]))
 		
 		elif (args[1] == "help"):
-			Help()
+			Message().help()
 		else:
 			InvalidOptionError()
 

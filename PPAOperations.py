@@ -66,16 +66,22 @@ def selectPPA(searchTerm):
 	maxId=listPPAS(listOfPPA)
 	
 	try:
-		print("Selet the PPA most likely to have the program you are looking for:(0 to exit)")
-		id =int(input())
-
-		while id>maxId:
-			InvalidOptionError()
-			print("Input a valid PPA ID:")
+		
+		condition = True
+		while condition:
+			
+			print("Selet the PPA most likely to have the program you are looking for:(0 to exit)")
+			
 			id=int(input())
 
-		if (id == 0) :
-			exit()
+			if id > maxId:
+				if id == 0 : 
+					exit()
+
+				InvalidOptionError()
+			else:
+				condition = False
+
 
 	except ValueError:		
 		# Ends the program if other than a number is passed as input
@@ -88,8 +94,29 @@ def getPPAInfo(ppa):
 	url = ppa.getURL()
 	page = httpRequestPage("launchpad.net",url)
 	table = re.compile('<img src="/@@/package-source"(.*?)</td>', re.DOTALL).findall(page)
+	softwareList = []
+
 	print("Software List avaliable in " + ppa.getName() + " :")
 	for element in table:
-		print(element[21:-16])
-	#Aviso e Opçoes
+		name = element[21:-16]
+		if name not in softwareList:
+			softwareList.append(name)
+			print(name)
+
+	condition = True
+	while condition:
+		print("Write down the software you want to install matching the list: (0 to exit)")
+		
+		userSelect = input()
+
+		if userSelect not in softwareList:
+			if userSelect == '0':
+				exit()
+			InvalidOptionError()
+		else:
+			condition = False
+
+	# Need to return software name and deb lines
+
+	#Show Warnings 
 	
