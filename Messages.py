@@ -9,7 +9,8 @@ class Message(object):
 		print(" install [program name to search] - Tries to find a list of PPA's that most likely will have the program you are searching for ")
 
 	def advice(self):
-		print("GET REMINDED THAT I AM NOT RESPONSABLE BY ANY DAMAGE CAUSED BY PPA'S DOWNLOADED SOFTWARE")
+		print("\nGET REMINDED THAT I AM NOT RESPONSABLE BY ANY DAMAGE CAUSED BY PPA'S DOWNLOADED SOFTWARE")
 		print("THIS PROGRAM AIMS ONLY TO MAKE IT EASY TO INSTALL SOFTWARE PRESENT IN PPAS")
 
-	
+	def proceed(self):
+		print("Do you want to proceed?(Y to continue/N to exit)")

@@ -14,7 +14,29 @@ from Messages import *
 
 def install(searchTerm):
 	ppa = selectPPA(searchTerm)
-	getPPAInfo(ppa)
+	[name,sources] = getPPAInfo(ppa)
+	Message().advice()
+	print("You are about to add "+ppa.getName()+" to your local PPA repository.\n")
+	print("And also install " + name + " on your Ubuntu machine.\n")
+	
+	
+	condition = True
+
+	while condition:
+
+		Message().proceed()
+		
+		op = input()
+
+		if (op == 'Y'):
+			condition = False
+		elif (op == 'N'):
+			exit()
+		else:
+			InvalidOptionError()
+
+
+
 
 	return 
 
