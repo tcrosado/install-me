@@ -5,7 +5,9 @@
 
 
 import sys
+#import re
 
+from SystemOperations import *
 from PPAOperations import *
 from PPALib import PPA
 from Error import *
@@ -37,8 +39,12 @@ def install(searchTerm):
 		else:
 			InvalidOptionError()
 
+	
+	#replacing YOUR_UBUNTU_VERSION_HERE with the actual version 
 
-
+	for i in range(len(sources)):
+		sources[i] = re.sub("YOUR_UBUNTU_VERSION_HERE",getUbuntuCodeName(),sources[i])
+	
 
 	return 
 
@@ -49,7 +55,7 @@ def options(args):
 		if (args[1] == "install"):
 		
 			install(" ".join(args[2:]))
-		
+			
 		elif (args[1] == "help"):
 			Message().help()
 		else:
