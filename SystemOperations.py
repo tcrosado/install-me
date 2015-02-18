@@ -20,12 +20,27 @@ def addRepository(source):
 	''' String -> {}
 	addRepository(source) gets the source line as argument and requiering 
 	root permissions adds the repository given to the local list of repositories'''
-	
+
+	print("Adding apt repository")
 	process = subprocess.Popen(['sudo','add-apt-repository',source],stdout=subprocess.PIPE)
 	output, err = process.communicate()
 	test = output.decode("utf-8")
-	print("Adding apt repository")
+	
 	return 
+
+def aptUpdate():
+	''' {} -> {}
+	aptUpdate() runs the "apt-get update" bash command, requiering root  
+	permissions to run it '''
+
+	print("Updating apt (might take awhille)")
+
+	process = subprocess.Popen(['sudo','apt-get','update'],stdout=subprocess.PIPE)
+	output, err = process.communicate()
+	test = output.decode("utf-8")
+	
+	return	
+
 
 
 	
