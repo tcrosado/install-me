@@ -44,7 +44,7 @@ def install(searchTerm):
 
 	for i in range(len(sources)):
 		sources[i] = re.sub("YOUR_UBUNTU_VERSION_HERE",getUbuntuCodeName(),sources[i])
-	
+		addRepository(sources[i])
 
 	return 
 
