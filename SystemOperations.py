@@ -18,8 +18,9 @@ def getUbuntuCodeName():
 
 def addRepository(source):
 	''' String -> {}
-	addRepository(source) gets the source line as argument and requiering 
-	root permissions adds the repository given to the local list of repositories'''
+	addRepository(source) gets the source line as argument and 
+	requiering root permissions adds the repository given to the local
+	list of repositories'''
 
 	print("Adding apt repository")
 	process = subprocess.Popen(['sudo','add-apt-repository',source],stdout=subprocess.PIPE)
@@ -30,17 +31,28 @@ def addRepository(source):
 
 def aptUpdate():
 	''' {} -> {}
-	aptUpdate() runs the "apt-get update" bash command, requiering root  
-	permissions to run it '''
+	aptUpdate() runs the "apt-get update" bash command, requiering 
+	root permissions to run it '''
 
 	print("Updating apt (might take awhille)")
 
 	process = subprocess.Popen(['sudo','apt-get','update'],stdout=subprocess.PIPE)
 	output, err = process.communicate()
-	test = output.decode("utf-8")
 	
 	return	
 
+def aptInstall(softwareName):
+	''' String -> {}
+	aptInstall() runs the "apt-get install" bash command with the 
+	softwareName passed as argument
+	This functions need root permissions '''
+
+	print("Installing "+softwareName) 
+
+	process = subprocess.Popen(['sudo','apt-get','install',softwareName],stdout=subprocess.PIPE)
+	output, err = process.communicate()
+
+	return 
 
 
 	
