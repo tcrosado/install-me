@@ -1,3 +1,8 @@
+#	Author : Tiago Rosado (speedofthesea)
+#
+#	Version : 1.0.0
+#
+
 import subprocess
 import re
 import os

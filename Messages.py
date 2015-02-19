@@ -1,4 +1,11 @@
-
+#	Author : Tiago Rosado (speedofthesea)
+#
+#	Version : 1.0.0
+#
+''' 
+Message class has as functions some of the principal Output messages 
+displayed by this program
+'''
 class Message(object):
 
 	def __init__(self):

@@ -1,11 +1,10 @@
 #	Author : Tiago Rosado (speedofthesea)
 #
-#	Version : 0.0.2 ALPHA
+#	Version : 1.0.0
 #
 
 
 import sys
-#import re
 
 from SystemOperations import *
 from PPAOperations import *
@@ -15,6 +14,16 @@ from Messages import *
 
 
 def install(searchTerm):
+	''' String -> {}
+	install(searchTerm) proceeds with the main process of installing 
+	a software based on the searchTerm given.
+	Firstly shows a list of PPA's that might have the sofware the user
+	is looking for, then confirms by presenting the list of sofware 
+	avaliable on the selected PPA proceeding with the confirmation of 
+	the software name with the user and then aplies all the bash 
+	commands needed to install the selected software with user 
+	confirmation
+	'''
 	ppa = selectPPA(searchTerm)
 	[name,sources] = getPPAInfo(ppa)
 	
@@ -54,6 +63,10 @@ def install(searchTerm):
 
 
 def options(args):
+	'''	String -> {}
+	options(args) receives the arguments passed by the user when 
+	launching the program via terminal
+	'''
 	try:
 		if (args[1] == "install"):
 		

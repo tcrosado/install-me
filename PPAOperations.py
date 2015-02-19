@@ -1,3 +1,8 @@
+#	Author : Tiago Rosado (speedofthesea)
+#
+#	Version : 1.0.0
+#
+
 import http.client
 import re
 from PPALib import PPA

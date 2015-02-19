@@ -1,7 +1,8 @@
 #	Author : Tiago Rosado (speedofthesea)
 #
-#	Version : 0.0.2 ALPHA
+#	Version : 1.0.0
 #
+
 import re
 
 '''

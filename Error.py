@@ -1,6 +1,11 @@
+#	Author : Tiago Rosado (speedofthesea)
+#
+#	Version : 1.0.0
+#
 
-''' Error class handles every error message used by the program '''
-
+''' 
+Error class handles every error message used by the program 
+'''
 class Error(Exception):
 
 	def __init__(self):
