@@ -9,11 +9,11 @@ At this point the program is functional and able to do what was designed for.
 
 To run this program just type on terminal:
 
-[code] python3 main.py install Name of the Software [/code]
+ python3 main.py install Name of the Software 
 
 The minimum requirement for this program to work is:
-[bullet]Python3[/bullet]
-[bullet]Ubuntu[/bullet] 
+Python3
+Ubuntu 
 
 
 Feel free to open issues so i can improve this software.
