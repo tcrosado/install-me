@@ -14,3 +14,6 @@ To run this program just type on terminal:
 The minimum requirement for this program to work is:
 [bullet]Python3[/bullet]
 [bullet]Ubuntu[/bullet] 
+
+
+Feel free to open issues so i can improve this software.
