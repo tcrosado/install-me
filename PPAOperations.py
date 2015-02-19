@@ -75,10 +75,9 @@ def selectPPA(searchTerm):
 			
 			id=int(input())
 
-			if id > maxId:
-				if id == 0 : 
-					exit()
-
+			if id == 0 : 
+				exit()
+			elif id > maxId:
 				InvalidOptionError()
 			else:
 				condition = False

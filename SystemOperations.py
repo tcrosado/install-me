@@ -1,6 +1,6 @@
 import subprocess
 import re
-
+import os
 
 
 
@@ -49,13 +49,12 @@ def aptInstall(softwareName):
 
 	print("Installing "+softwareName) 
 
-	process = subprocess.Popen(['sudo','apt-get','install',softwareName],stdout=subprocess.PIPE)
-	output, err = process.communicate()
+	os.system('sudo apt-get install '+softwareName)
 
+	print("Installation Done")
 	return 
 
 
 	
-
 
 

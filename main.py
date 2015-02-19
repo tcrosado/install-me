@@ -47,6 +47,8 @@ def install(searchTerm):
 		addRepository(sources[i])
 
 	aptUpdate()
+	aptInstall(name)
+	
 	return 
 
 
